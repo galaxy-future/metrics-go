@@ -16,7 +16,7 @@ func NewMonitoringMetric(metricName string, labels []string, builder aggregate.B
 	return monitoring.NewMetric(metricName, labels, builder)
 }
 
-//NewStreamingMetric 新建z指标流收集
+//NewStreamingMetric 新建指标流收集
 func NewStreamingMetric(metricName string, labels []string) types.Metrics {
 	return streaming.NewMetric(metricName, labels)
 }
