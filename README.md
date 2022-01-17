@@ -42,8 +42,12 @@ latencyMax.With().Value(float64(cost))
 latency.With().Value(float64(cost))
 ```
 
-**指标查询**
+行为准则
+------
+[贡献者公约](https://github.com/galaxy-future/cudgx/blob/master/CODE_OF_CONDUCT.md)
 
+授权
+-----
 
-![metrics-query](./images/metrics-query.png)
+Metrics-Go使用[Elastic License 2.0](https://github.com/galaxy-future/cudgx/blob/master/LICENSE)授权协议进行授权
 
