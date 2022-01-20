@@ -11,8 +11,15 @@ import (
 	"google.golang.org/protobuf/proto"
 	"io"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"time"
+)
+
+const (
+	MaxIdleConns        int = 100
+	MaxIdleConnsPerHost int = 100
+	IdleConnTimeout     int = 90
 )
 
 var GatewayClient *GatewaySender
@@ -23,6 +30,7 @@ type GatewaySender struct {
 	timeout         time.Duration
 	backoffDuration time.Duration
 	gatewayUrl      string
+	httpclient      *http.Client
 }
 
 func InitGatewayClient() error {
@@ -40,12 +48,31 @@ func newGatewaySender() (*GatewaySender, error) {
 		timeout:         SendTimeout,
 		backoffDuration: DurationBackoff,
 		gatewayUrl:      GatewayUrl,
+		httpclient:      createHTTPClient(),
 	}
 	if err := sender.ping(); err != nil {
 		return nil, err
 	}
 	return nil, nil
 }
+
+// createHTTPClient for connection re-use
+func createHTTPClient() *http.Client {
+	client := &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   30 * time.Second,
+				KeepAlive: 30 * time.Second,
+			}).DialContext,
+			MaxIdleConns:        MaxIdleConns,
+			MaxIdleConnsPerHost: MaxIdleConnsPerHost,
+			IdleConnTimeout:     time.Duration(IdleConnTimeout) * time.Second,
+		},
+	}
+	return client
+}
+
 func (gateway *GatewaySender) SendMetric(batch *mod.MetricBatch) error {
 	data, err := proto.Marshal(batch)
 	if err != nil {
@@ -99,10 +126,7 @@ func (gateway *GatewaySender) SendStreaming(batch *mod.StreamingBatch) error {
 }
 
 func sendBatch(method string, data []byte, metricsName string) error {
-	client := &http.Client{
-		Timeout: SendTimeout,
-	}
-	resp, err := client.Post(fmt.Sprintf("%s/v1/%v/%s/%s", GatewayUrl, method, ServiceName, metricsName), "application/binary", bytes.NewBuffer(data))
+	resp, err := GatewayClient.httpclient.Post(fmt.Sprintf("%s/v1/%v/%s/%s", GatewayUrl, method, ServiceName, metricsName), "application/binary", bytes.NewBuffer(data))
 	if err != nil {
 		return err
 	}
