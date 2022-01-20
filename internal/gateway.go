@@ -53,7 +53,7 @@ func newGatewaySender() (*GatewaySender, error) {
 	if err := sender.ping(); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return sender, nil
 }
 
 // createHTTPClient for connection re-use
