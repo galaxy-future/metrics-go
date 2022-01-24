@@ -77,7 +77,13 @@ metric_qps指标接入示例：
 
 [https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go](cudgx-sample-pi)
 
-**四、指标查询**
 
+行为准则
+------
+[贡献者公约](https://github.com/galaxy-future/cudgx/blob/master/CODE_OF_CONDUCT.md)
 
-![metrics-query](./images/metrics-query.png)
+授权
+-----
+
+Metrics-Go使用[Elastic License 2.0](https://github.com/galaxy-future/cudgx/blob/master/LICENSE)授权协议进行授权
+

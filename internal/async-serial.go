@@ -1,8 +1,8 @@
 package internal
 
 import (
-	"github.com/galaxy-future/cudgx/metrics-go/aggregate"
-	"github.com/galaxy-future/cudgx/metrics-go/types"
+	"github.com/galaxy-future/metrics-go/aggregate"
+	"github.com/galaxy-future/metrics-go/types"
 )
 
 type AsyncSerial struct {

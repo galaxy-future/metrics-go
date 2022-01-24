@@ -1,8 +1,8 @@
 package internal
 
 import (
-	"github.com/galaxy-future/cudgx/common/logger"
-	"github.com/galaxy-future/cudgx/common/utils"
+	"github.com/galaxy-future/metrics-go/common/logger"
+	"github.com/galaxy-future/metrics-go/common/utils"
 	"os"
 	"time"
 )
@@ -19,7 +19,7 @@ const (
 
 var (
 	AggregateDuration = time.Second
-	SendTimeout       = time.Millisecond * 500
+	SendTimeout       = time.Second * 5
 	ResendTimes       = 1
 	DurationBackoff   = 100 * time.Millisecond
 	GatewayUrl        = "http://cudgx-gateway.internal.galaxy-future.org"

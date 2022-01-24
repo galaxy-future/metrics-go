@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/galaxy-future/cudgx/metrics-go/common/logger"
+	"github.com/galaxy-future/metrics-go/common/logger"
 	"go.uber.org/zap"
 	"os"
 	"strconv"

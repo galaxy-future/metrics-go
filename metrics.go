@@ -1,13 +1,13 @@
 package metrics_go
 
 import (
-	"github.com/galaxy-future/cudgx/common/logger"
-	"github.com/galaxy-future/cudgx/metrics-go/aggregate"
-	"github.com/galaxy-future/cudgx/metrics-go/internal"
-	"github.com/galaxy-future/cudgx/metrics-go/internal/monitoring"
-	"github.com/galaxy-future/cudgx/metrics-go/internal/streaming"
-	"github.com/galaxy-future/cudgx/metrics-go/types"
 	"context"
+	"github.com/galaxy-future/metrics-go/aggregate"
+	"github.com/galaxy-future/metrics-go/common/logger"
+	"github.com/galaxy-future/metrics-go/internal"
+	"github.com/galaxy-future/metrics-go/internal/monitoring"
+	"github.com/galaxy-future/metrics-go/internal/streaming"
+	"github.com/galaxy-future/metrics-go/types"
 	"go.uber.org/zap"
 )
 
@@ -16,7 +16,7 @@ func NewMonitoringMetric(metricName string, labels []string, builder aggregate.B
 	return monitoring.NewMetric(metricName, labels, builder)
 }
 
-//NewStreamingMetric 新建z指标流收集
+//NewStreamingMetric 新建指标流收集
 func NewStreamingMetric(metricName string, labels []string) types.Metrics {
 	return streaming.NewMetric(metricName, labels)
 }
