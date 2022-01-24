@@ -75,7 +75,7 @@ metric_qps指标接入示例：
 
 **五、指标接入示例应用： cudgx-sample-pi**
 
-[https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go](cudgx-sample-pi)
+[点击查看cudgx-sample-pi示例程序](https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go)
 
 
 行为准则
