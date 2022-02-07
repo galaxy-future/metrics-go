@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	MaxIdleConns        int = 100
-	MaxIdleConnsPerHost int = 100
+	MaxIdleConns        int = 10
+	MaxIdleConnsPerHost int = 10
 	IdleConnTimeout     int = 90
 )
 
