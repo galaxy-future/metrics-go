@@ -126,10 +126,15 @@ func (gateway *GatewaySender) SendStreaming(batch *mod.StreamingBatch) error {
 }
 
 func sendBatch(method string, data []byte, metricsName string) error {
-	resp, err := GatewayClient.httpclient.Post(fmt.Sprintf("%s/v1/%v/%s/%s", GatewayUrl, method, ServiceName, metricsName), "application/binary", bytes.NewBuffer(data))
+
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1/%v/%s/%s", GatewayUrl, method, ServiceName, metricsName), bytes.NewBuffer(data))
 	if err != nil {
 		return err
 	}
+	req.Header.Set("Content-Type", "application/binary")
+	req.Header.Set("Connection", "keep-alive")
+
+	resp, err := GatewayClient.httpclient.Do(req)
 
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
@@ -147,10 +152,8 @@ func sendBatch(method string, data []byte, metricsName string) error {
 }
 
 func (gateway *GatewaySender) ping() error {
-	client := &http.Client{
-		Timeout: SendTimeout,
-	}
-	resp, err := client.Get(fmt.Sprintf("%s/ping", GatewayUrl))
+
+	resp, err := gateway.httpclient.Get(fmt.Sprintf("%s/ping", GatewayUrl))
 	if err != nil {
 		return err
 	}
