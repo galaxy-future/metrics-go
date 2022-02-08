@@ -140,14 +140,15 @@ func sendBatch(method string, data []byte, metricsName string) error {
 		_ = Body.Close()
 	}(resp.Body)
 
-	if resp.StatusCode/100 == 2 {
-		return nil
-	}
-
 	respData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
+
+	if resp.StatusCode/100 == 2 {
+		return nil
+	}
+
 	return fmt.Errorf("failed to send metric to gateway message: %s", string(respData))
 }
 
