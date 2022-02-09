@@ -17,7 +17,7 @@
 指标分为两类： 监控指标和流式指标
 
 - 监控指标： sdk聚合后，将数据上报至CudgX-gateway。
-- 流式指标： sdk收集指标详细数据，不做聚合将数据，将数据上报至CudgX-gateway。
+- 流式指标： sdk收集指标详细数据，不做聚合，将数据上报至CudgX-gateway。
 
 **1、新建指标**
 
@@ -73,7 +73,7 @@ metric_qps指标接入示例：
 
 ![with](./images/with.png)
 
-**五、指标接入示例应用： cudgx-sample-pi**
+### 四、指标接入示例应用： cudgx-sample-pi
 
 [点击查看cudgx-sample-pi示例程序](https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go)
 
