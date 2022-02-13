@@ -2,6 +2,11 @@
 
 `metrics-go` is the dotting tool of CudgX metrics
 
+Language
+----
+
+English | [中文](https://github.com/galaxy-future/metrics-go/blob/master/docs/CH-README.md)
+
 
 ### Data Flow
 
