@@ -1,89 +1,97 @@
 ## Metrics-Go 
 
-`metrics-go` 是cudgx指标打点工具。
+`metrics-go` is the dotting tool of CudgX metrics
 
-### 一、数据流程
+Language
+----
 
-指标数据流程为： 
-1. 用户代码集成SDK。
-2. SDK指标聚合：SDK会将用户的打点数据按照指定时间周期聚合（默认是1s）。 
-3. batch推送：每个聚合周期会将指标推送到CudgX-gateway。
-4. CudgX-gateway将数据分发到Kafka。
-5. CudgX-consumer消费数据，并存储至clickhouse。
-6. 基于clickhouse数据查询指标。
+English | [中文](https://github.com/galaxy-future/metrics-go/blob/master/docs/CH-README.md)
 
-### 二、如何使用SDK完成指标数据采集
 
-指标分为两类： 监控指标和流式指标
+### Data Flow
 
-- 监控指标： sdk聚合后，将数据上报至CudgX-gateway。
-- 流式指标： sdk收集指标详细数据，不做聚合，将数据上报至CudgX-gateway。
+The matric data flow is as follows:
+1.	User integrates code with SDK
+2.	SDK matric integration: SDK aggregates user data in a specified period (1s by default).
+3.	Batch Push: Each aggregation cycle pushes metrics to CudgX-gateway
+4.	CudgX-gateway distributes data to Kafka 
+5.	CudgX-consumer consumes data and stores it to clickhouse
+6.	Query metrics based on clickhouse data 
 
-**1、新建指标**
 
-（1）新建监控指标
 
-QPS指标数据采集，示例：
+### How to use SDK complete metrics data collection 
+Metrics are classified into two categories: Monitoring Metrics and Streaming Metrics
+- Monitoring Metrics: After SDK Aggregation, data is reported to CudgX-gateway. 
+- Streaming Metrics: SDK collects detailed data of metrics and reports data to CudgX-gateway without aggregation Create Monitoring Metrics.
+
+
+**1.Create  Metrics**
+
+（1）Create Monitoring Metrics
+
+QPS metrics data collection, for example:
 ```go
 qps = metricGo.NewMonitoringMetric("qps", []string{}, aggregate.NewCountBuilder())
 ```
 
-（2）新建流式指标
-
-latency数据采集，示例：
+（2）Create Streaming Metrics 
+ latency data collection, for example:
 ```go
 latency = metricGo.NewStreamingMetric("latency", []string{})
 ```
 
-**2、打点（采集指标数据）**
+**2.	Dotting (Collect Metrics Data)**
 
-示例：
+For example:
 ```go
 begin := time.Now()
-// 业务接口/方法
+// Business Interface/Method
+
 cost := time.Now().Sub(begin).Milliseconds()
 qps.With().Value(1)
 latency.With().Value(float64(cost))
 ```
 
-### 三、如何自定义指标
-metric_qps指标接入示例：
+### How to customize metrics
+metric_qps metrics access example:
 
-**1、实现metrics-go中Function、Builder接口**
+
+**1.Implement Function and Builder interfaces in metrics-go**
 
 ![base](./images/base.png)
 
-（1）实现Function intf，示例：
+（1）Implement Function intf, for example：
 
 ![function](./images/function.png)
 
-（2）实现Builder intf，示例：
+（2）Implement Builder intf,for example：
 
 ![builder](./images/builder.png)
 
-**2、新建监控指标**
+**2.Create Monitoring Metrics**
 
-示例：
+for example：
 
 ![new](./images/new.png)
 
-**3、打点（采集指标数据）**
+**3.Dotting (Collect Metrics Data)**
 
-示例：
+for example：
 
 ![with](./images/with.png)
 
-### 四、指标接入示例应用： cudgx-sample-pi
+### Metrics Access Example Application: `cudgx-sample-pi`
 
-[点击查看cudgx-sample-pi示例程序](https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go)
+click to view [cudgx-sample-pi](https://github.com/galaxy-future/cudgx/blob/master/sample/pi/main.go) sample program
 
 
-行为准则
+Code of Conduct
 ------
-[贡献者公约](https://github.com/galaxy-future/cudgx/blob/master/CODE_OF_CONDUCT.md)
+[Contributor Convention](https://github.com/galaxy-future/cudgx/blob/master/CODE_OF_CONDUCT.md)
 
-授权
+Authorization
 -----
 
-Metrics-Go使用[Elastic License 2.0](https://github.com/galaxy-future/cudgx/blob/master/LICENSE)授权协议进行授权
+Metrics-Go uses [Elastic License 2.0](https://github.com/galaxy-future/cudgx/blob/master/LICENSE) Agreement for Authorization.
 
