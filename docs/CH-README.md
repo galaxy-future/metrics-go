@@ -1,5 +1,16 @@
 ## Metrics-Go 
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/galaxy-future/BridgX)](https://goreportcard.com/report/github.com/galaxy-future/BridgX) &nbsp;
+[![CodeFactor](https://www.codefactor.io/repository/github/galaxy-future/bridgx/badge)](https://www.codefactor.io/repository/github/galaxy-future/bridgx)
+
+语言(language)
+----
+
+中文 | [English](https://github.com/galaxy-future/metrics-go/blob/master/README.md)
+
+简介
+----
+
 `metrics-go` 是cudgx指标打点工具。
 
 ### 一、数据流程
