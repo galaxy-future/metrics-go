@@ -1,12 +1,17 @@
 ## Metrics-Go 
+[![Go Report Card](https://goreportcard.com/badge/github.com/galaxy-future/BridgX)](https://goreportcard.com/report/github.com/galaxy-future/BridgX) &nbsp;
+[![CodeFactor](https://www.codefactor.io/repository/github/galaxy-future/bridgx/badge)](https://www.codefactor.io/repository/github/galaxy-future/bridgx)
 
-`metrics-go` is the dotting tool of CudgX metrics
 
 Language
 ----
 
 English | [中文](https://github.com/galaxy-future/metrics-go/blob/master/docs/CH-README.md)
 
+Introduction
+-------
+
+`metrics-go` is the dotting tool of CudgX metrics.
 
 ### Data Flow
 
