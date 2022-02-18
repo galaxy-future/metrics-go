@@ -53,7 +53,7 @@ func flushMetric() {
 
 func metricToBatch(m *internal.AsyncMetrics) *mod.MetricBatch {
 	//timestamp := time.Now().Truncate(internal.AggregateDuration).Unix() * 1000
-	timestamp := time.Now().Unix()
+	timestamp := time.Now().UnixMilli()
 	batch := mod.MetricBatch{}
 	batch.MetricName = m.Name
 	batch.ServiceName = internal.ServiceName
